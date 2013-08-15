@@ -2,6 +2,7 @@ package Intern::Diary::Util;
 
 use strict;
 use warnings;
+
 use utf8;
 
 use Carp ();
@@ -17,6 +18,14 @@ sub datetime_from_db ($) {
     $dt->set_time_zone(config->param('db_timezone'));
     $dt->set_formatter( DateTime::Format::MySQL->new );
     $dt;
+}
+
+sub require_argument {
+    my ($class, $args, $label, $object_name) = @_;
+    my $obj = $args->{$label} // croak "required: $label";
+    !$obj->isa($object_name) && croak "invalid object: $label";
+
+    return $obj;
 }
 
 1;
