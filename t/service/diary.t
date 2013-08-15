@@ -58,8 +58,8 @@ sub find_diary_by_user : Test(3) {
 
     my $user = create_user;
     my $now = DateTime->now();
-    my $oldday = DateTime->from_epoch( epoch => 1000000 );
-
+    my $oldday = DateTime->from_epoch( epoch => 10000000 );
+    my $moreoldday = DateTime->from_epoch( epoch =>  9000000 );
     my $diary_1 = create_diary(
       user=>$user,
       date => $now,
@@ -73,11 +73,37 @@ sub find_diary_by_user : Test(3) {
       content => 'Content 2'
     );
 
-    my $diaries = Intern::Diary::Service::Diary->find_diary_by_user($db, {user=>$user});
+    my $diary_3 = create_diary(
+      user=>$user,
+      date => $moreoldday,
+      title => 'Diary 3',
+      content => 'Content 3'
+    );
 
-    is scalar @$diaries, 2, '2件みつかった';
-    is_deeply $diaries->[0], $diary_1,'1件目が新しい';
-    is_deeply $diaries->[1], $diary_2, '2件目は古い';
+    subtest 'Without Limit/Offset' => sub {
+        plan tests=>2;
+        my $diaries = Intern::Diary::Service::Diary->find_diary_by_user($db, {user=>$user});
+
+        is scalar @$diaries, 3, '3件みつかった';
+        is_deeply $diaries, [$diary_1,$diary_2,$diary_3],'新しい順に全部取れている';
+    };
+
+    subtest 'With Limit' => sub {
+        plan tests=>2;
+        my $diaries = Intern::Diary::Service::Diary->find_diary_by_user($db, {user=>$user, limit=>2});
+
+        is scalar @$diaries, 2, '2件みつかった';
+        is_deeply $diaries, [$diary_1,$diary_2],'新しい方から2つ取れている';
+    };
+
+    subtest 'With Limit/Offset' => sub {
+        plan tests=>2;
+        my $diaries = Intern::Diary::Service::Diary->find_diary_by_user($db, {user=>$user, limit=>1, offset=>1});
+
+        is scalar @$diaries, 1, '1件みつかった';
+        is_deeply $diaries, [$diary_2],'新しい方から2つ取れている';
+    };
+
 }
 
 sub update_diary_with_user_and_date : Test(2) {

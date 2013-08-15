@@ -42,12 +42,26 @@ sub find_diary_by_user {
     # 必須のパラメータ
     my $user = Intern::Diary::Util->require_argument($args, 'user', 'Intern::Diary::Model::User');
 
+    # Optional Params
+    my $offset = $args->{offset} // 0;
+    my $limit = $args->{limit} // 0;
+
     # 探して返す
-    return $db->dbh('intern_diary')->select_all_as(q[
+    # LimitあるかどうかでSeqかえてる
+    if( $limit > 0 ) {
+        return $db->dbh('intern_diary')->select_all_as(q[
+SELECT * FROM diary
+ WHERE user_id=:user_id
+ ORDER BY date desc LIMIT :limit OFFSET :offset
+        ], +{ user_id=>$user->user_id , limit => $limit, offset => $offset}, 'Intern::Diary::Model::Diary');
+    } else {
+        return $db->dbh('intern_diary')->select_all_as(q[
 SELECT * FROM diary
  WHERE user_id=:user_id
  ORDER BY date desc
-    ], +{ user_id=>$user->user_id }, 'Intern::Diary::Model::Diary');
+        ], +{ user_id=>$user->user_id }, 'Intern::Diary::Model::Diary');
+
+    }
 
 }
 
