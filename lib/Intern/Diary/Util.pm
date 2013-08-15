@@ -5,7 +5,7 @@ use warnings;
 
 use utf8;
 
-use Carp ();
+use Carp;
 use Sub::Name;
 
 use DateTime;
