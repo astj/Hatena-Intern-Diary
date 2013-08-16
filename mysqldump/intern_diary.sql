@@ -30,7 +30,7 @@ CREATE TABLE `diary` (
   `content` varchar(512) NOT NULL,
   PRIMARY KEY (`diary_id`),
   UNIQUE KEY `user_id` (`user_id`,`date`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `diary` (
 
 LOCK TABLES `diary` WRITE;
 /*!40000 ALTER TABLE `diary` DISABLE KEYS */;
-INSERT INTO `diary` VALUES (3,1,'2013-08-15','ほげほげ','ほげはほげでほげがほげ');
+INSERT INTO `diary` VALUES (2,1,'2013-08-14','Yesterday','SQL toka DBI tokairo iro'),(3,1,'2013-08-13','Ago','Ago Ago Ago Ago'),(4,1,'2013-08-12','Long Ago','Ago Ago Ago Ago Ago'),(5,1,'2013-08-11','Long Long Ago','Ago Ago Ago Ago Ago'),(6,1,'2013-08-15','こんな感じ','テスト書くのしんどい');
 /*!40000 ALTER TABLE `diary` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +55,7 @@ CREATE TABLE `user` (
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'asato');
+INSERT INTO `user` VALUES (1,'asato'),(7,'esato'),(6,'isato'),(8,'ororo'),(4,'osaro'),(5,'osato'),(2,'second'),(3,'test_user_QT4zwLFSKsVdavP');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -77,4 +77,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-08-15 15:23:11
+-- Dump completed on 2013-08-17  1:42:17
