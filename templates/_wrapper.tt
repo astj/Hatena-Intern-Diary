@@ -3,9 +3,26 @@
   <head>
     <meta charset=utf-8>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intern::Diary</title>
+    <title>Intern::Diary[% IF page_title %] - [% page_title %][% END %]</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
   </head>
   <body>
-    [% content %]
+    <div id="container">
+      <header id="main-header">
+        <h1 id="header-title"><a href="/">Intern::Diary</a>[% IF target_user_name %]::<a href="/diary/list/[% target_user_name %]">[% target_user_name %]</a>[% END %]</h1>
+        <div id="header-info">
+[% IF current_user_name %]
+User : [% current_user_name %] - <a href="/diary/write">日記を書く</a> - <a href="/user/logout">ログアウト</a>
+[% ELSE %]
+<a href="/user/login">ログイン</a>
+[% END %]
+        </div>
+        <br clear="all">
+      </header>
+      <hr />
+      [% content %]
+      <footer id="main-footer">
+        by id:astj. Created during Hatena::Intern::2013.
+      </footer>
   </body>
 </html>

@@ -1,0 +1,31 @@
+[% WRAPPER '_wrapper.tt' %]
+<section>
+
+<h2>ユーザー登録</h2>
+<form action="/user/register" method="POST" id="user_register">
+<!-- tableレイアウト -->
+<table>
+<tbody>
+<tr>
+<th>ユーザーID</th>
+<td><input size=20 name="user_name"></td>
+<td>
+[% IF error_message.user_name %]
+<span class="error_message">[% error_message.user_name %]</span>
+[% END %]
+</td>
+</tr>
+<Tr>
+<td></td>
+<td>
+<input type="submit" value="登録する">
+<input type="reset" value="リセット">
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+
+</section>
+
+[% END # WRAPPER %]

@@ -1,0 +1,34 @@
+[% WRAPPER '_wrapper.tt' %]
+<section>
+
+<h2>ログイン</h2>
+<form action="/user/login" method="POST" id="user_login">
+<!-- tableレイアウト -->
+<table>
+<tbody>
+<tr>
+<th>ユーザーID</th>
+<td><input size=20 name="user_name"></td>
+<td>
+[% IF error_message.user_name %]
+<span class="error_message">[% error_message.user_name %]</span>
+[% END %]
+</td>
+</tr>
+<Tr>
+<td></td>
+<td>
+<input type="submit" value="ログイン">
+<input type="reset" value="リセット">
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+
+<h2>ユーザー登録</h2>
+<p>まだこのサービスを使ったことがない場合は<a href="/user/register">ユーザー登録</a>して使い始めましょう！</p>
+
+</section>
+
+[% END # WRAPPER %]
