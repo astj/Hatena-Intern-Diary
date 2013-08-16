@@ -1,0 +1,63 @@
+[% WRAPPER '_wrapper.tt' %]
+<section>
+<h2>日記を書く</h2>
+<form action="/diary/write" method="POST" id="write_diary">
+<table class="write_table">
+<tbody>
+<tr>
+<th>日付</th>
+<td>
+<input type="hidden" name="diary_date" value="[% target_date.ymd('-') %]">
+[% IF 0 %]
+<input size=4 name="diary_year" value="[% target_date.year %]" />年
+<input size=2 name="diary_month" value="[% target_date.month %]" />月
+<input size=2 name="diary_day" value="[% target_date.day %]" />日の日記
+[% END %]
+[% target_date.ymd('-') %]
+</td>
+</tr>
+<tr>
+<th>タイトル</th>
+<td >
+<input style="width:100%" name="diary_title" value="[% IF diary %][% diary.title %][% END %]" />
+</td>
+</tr>
+<tr>
+<th nowrap>本文</th>
+<td>
+<textarea name="diary_content" style="width:100%;height:10em;">
+[% IF diary %][% diary.content %][% END %]
+</textarea>
+</td>
+</tr>
+<tr>
+<td colspan=2 class="submitarea">
+<input type="submit" value="投稿する">
+<input type="reset" value="リセット">
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+
+[% IF diary %]
+<h2>日記を削除する</h2>
+<p>この日の日記を削除する場合は"削除する"をクリックしてください。</p>
+<form action="/diary/delete" method="POST" id="write_diary">
+<table class="write_table">
+<input type="hidden" name="diary_date" value="[% target_date.ymd('-') %]">
+<tbody>
+<tr>
+<td colspan=2 class="submitarea">
+<input type="submit" value="削除する">
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+
+[% END %]
+
+</section>
+
+[% END # WRAPPER %]
