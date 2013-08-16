@@ -65,6 +65,24 @@ SELECT * FROM diary
 
 }
 
+# 上とペア。数だけをとりあえず返す
+sub count_diary_by_user {
+    my ($class, $db, $args) = @_;
+
+    # 必須のパラメータ
+    my $user = Intern::Diary::Util->require_argument($args, 'user', 'Intern::Diary::Model::User');
+
+
+    # 探して返す
+        my $count =  $db->dbh('intern_diary')->select_one(q[
+SELECT COUNT(*) AS count FROM diary
+ WHERE user_id=:user_id
+        ], +{ user_id=>$user->user_id });
+
+    return $count;
+
+}
+
 # Update a Diary record
 sub update_diary_with_user_and_date {
     my ($class, $db, $args) = @_;
@@ -113,6 +131,7 @@ SELECT * FROM diary WHERE user_id=:user_id AND date=:date
     ], +{ user_id=>$user->user_id , date=>DateTime::Format::MySQL->format_date($date) },'Intern::Diary::Model::Diary');
 
 }
+
 
 # DBIに薄皮被せただけのところ
 

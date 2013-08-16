@@ -106,6 +106,36 @@ sub find_diary_by_user : Test(3) {
 
 }
 
+sub count_diary_by_user : Test(1) {
+    my $self = shift;
+
+    my $db = Intern::Diary::DBI::Factory->new;
+
+    my $user = create_user;
+    my $now = DateTime->now();
+    my $oldday = DateTime->from_epoch( epoch => 10000000 );
+    my $moreoldday = DateTime->from_epoch( epoch =>  9000000 );
+    my $diary_1 = create_diary(
+      user=>$user,
+      date => $now,
+      title => 'Diary 1',
+      content => 'こんてんと1'
+    );
+    my $diary_2 = create_diary(
+      user=>$user,
+      date => $oldday,
+      title => 'Diary 2',
+      content => 'Content 2'
+    );
+
+
+    my $count = Intern::Diary::Service::Diary->count_diary_by_user($db, {user=>$user});
+
+    is $count, 2, '2件みつかった';
+
+
+}
+
 sub update_diary_with_user_and_date : Test(2) {
     my $self = shift;
 
