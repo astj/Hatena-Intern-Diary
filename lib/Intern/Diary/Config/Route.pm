@@ -18,10 +18,10 @@ sub make_router {
 #            engine => 'User',
 #            action => 'list',
 #        };
-#        connect '/user/register' => {
-#            engine => 'User',
-#            action => 'register',
-#        } => { method => 'POST' };
+        connect '/user/register' => {
+            engine => 'User',
+            action => 'register_form',
+        };
 
 # ここからastj
 
