@@ -22,6 +22,7 @@ builder {
     # enable 'ReverseProxy';
     enable 'Runtime';
     enable 'Head';
+    enable 'Session';
 
     if (config->env eq 'production') {
         my $access_log = Path::Class::file($ENV{ACCESS_LOG} || "$root/log/access_log");

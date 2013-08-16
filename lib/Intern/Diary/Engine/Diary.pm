@@ -101,6 +101,12 @@ sub show_article {
 sub write_article {
     my ($class, $c) = @_;
 
+    # Loginしてなかったら弾く
+    if( ! defined $c->current_user ) {
+        $c->html('u_need_login.html', +{page_title => 'Please Login'});
+        return;
+    }
+
     # Obtain Target Date
     # ここでは必須ではない
     my $target_date_txt = $c->req->route_parameters->{splat}->[0];
@@ -127,6 +133,12 @@ sub write_article {
 # /diary/write POST
 sub post_article {
     my ($class, $c) = @_;
+
+    # Loginしてなかったら弾く
+    if( ! defined $c->current_user ) {
+        $c->html('u_need_login.html', +{page_title => 'Please Login'});
+        return;
+    }
 
     # Obtain Target User (is Current User)
     my $target_user = $c->current_user;
@@ -171,6 +183,12 @@ sub post_article {
 # /diary/write POST
 sub delete_article {
     my ($class, $c) = @_;
+
+    # Loginしてなかったら弾く
+    if( ! defined $c->current_user ) {
+        $c->html('u_need_login.html', +{page_title => 'Please Login'});
+        return;
+    }
 
     # Obtain Target User (is Current User)
     my $target_user = $c->current_user;

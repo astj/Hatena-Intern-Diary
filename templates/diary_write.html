@@ -43,7 +43,7 @@
 [% IF diary %]
 <h2>日記を削除する</h2>
 <p>この日の日記を削除する場合は"削除する"をクリックしてください。</p>
-<form action="/diary/delete" method="POST" id="write_diary">
+<form action="/diary/delete" method="POST" id="delete_diary">
 <table class="write_table">
 <input type="hidden" name="diary_date" value="[% target_date.ymd('-') %]">
 <tbody>

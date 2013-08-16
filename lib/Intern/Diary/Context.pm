@@ -21,6 +21,8 @@ use Class::Accessor::Lite::Lazy (
 use Intern::Diary::Error;
 use Intern::Diary::DBI::Factory;
 
+use Intern::Diary::Service::User;
+
 ### Properties
 
 sub from_env {
@@ -67,6 +69,17 @@ sub render_file {
 
 sub html {
     my ($self, $file, $args) = @_;
+
+    # Some Hooks
+    ## Add 'current_user_name' to $args
+    if ( defined $self->current_user ) {
+        $args->{current_user_name} = $self->current_user->name;
+
+        ## Add 'target_is_current' to $args
+        if( defined $args->{target_user_name} ) {
+            $args->{target_is_current} = 1 - abs($args->{current_user_name} cmp $args->{target_user_name});
+        }
+    }
 
     my $content = $self->render_file($file, $args);
     $self->response->code(200);
@@ -118,6 +131,39 @@ sub _build_db {
 sub dbh {
     my ($self, $name) = @_;
     return $self->db->dbh($name);
+}
+
+### astj
+sub current_user {
+    # なんも認証してない ;-D
+    my ($self,$attempt_user_name) = @_;
+
+    # 引数がある場合はそちらがキー
+    # この場合はキャッシュしてるcurrent_userをクリアする
+    if ( defined $attempt_user_name ) {
+        delete $self->{_current_user};
+    } else {
+        $attempt_user_name = $self->env->{'psgix.session'}->{current_user_name};
+    }
+
+    my $current_user = $self->{_current_user} //= Intern::Diary::Service::User->find_user_by_name( $self->db,+{
+        name => $attempt_user_name // ''
+    } );
+
+    # 認証できていればSessionに記録
+    if ( defined $current_user ) { $self->env->{'psgix.session'}->{current_user_name} = $current_user->name; }
+
+    return $current_user;
+}
+
+sub logout_user {
+    my ($self) = @_;
+
+    # セッションをクリアする
+    delete $self->env->{'psgix.session'}->{current_user_name};
+
+    # current_userのキャッシュをクリアする
+    delete $self->{_current_user};
 }
 
 1;
