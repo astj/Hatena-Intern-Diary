@@ -74,6 +74,15 @@ sub make_router {
             action => 'list',
         };
 
+# for js-ex
+
+        # /api/diary_list
+        # /api/diary_list/
+        connect qr{/API/diary_list/(\w+)/?} => {
+            engine => 'API',
+            action => 'diary_list',
+        };
+
 
     };
 }

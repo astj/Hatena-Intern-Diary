@@ -1,5 +1,7 @@
 [% WRAPPER '_2_column.tt' %]
 
+<div id="article_list_body">
+
 [% FOREACH item IN diaries %]
 
 [% INCLUDE '_single_article.tt' WITH
@@ -11,8 +13,9 @@
 
 [% END # FOREACH %]
 
-[% IF total_pages %]
-        <div id="article_footer" style="text-align:center">
+</div>
+
+<div id="article_list_footer" style="text-align:center">
 
 [% IF current_page != 1 %]
           <a href="?page=1">&lt;&lt;</a> |
@@ -31,7 +34,7 @@
 	  &gt;&gt;
 [% END # current_page %]
 
-        </div>
-[% END # IF %]
+</div>
+
 
 [% END # WRAPPER %]

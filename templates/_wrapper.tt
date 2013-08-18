@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intern::Diary[% IF page_title %] - [% page_title %][% END %]</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   </head>
   <body>
     <div id="container">
