@@ -1,0 +1,15 @@
+        <article id="article_[% date.ymd('-') %]" class="article">
+          <h2 class="article_title"><a href="/diary/read/[% name %]/[% date.ymd('-') %]">
+[% title %]</a></h2>
+          <div class="article_rightside">
+[% date.ymd('/') %]
+[% IF show_edit %]
+ - <a href="/diary/write/[% date.ymd('-') %]">編集</a>
+[% END %]
+	  </div>
+          <div>
+[% content %]
+            </div>
+        </article>
+
+        <hr>

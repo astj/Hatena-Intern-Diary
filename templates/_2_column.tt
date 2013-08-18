@@ -1,0 +1,10 @@
+[% WRAPPER '_wrapper.tt' %]
+      <aside id="main-sidebar">
+        <h3>Search</h3>
+        <div>あるといいね</div>
+      </aside>
+      <section id="mainsection">
+      [% content %]
+      </section>
+      <br clear="all" />
+[% END # WRAPPER %]

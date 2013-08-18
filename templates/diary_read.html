@@ -1,0 +1,15 @@
+[% WRAPPER '_2_column.tt' %]
+
+[% FOREACH item IN diaries %]
+
+[% INCLUDE '_single_article.tt' WITH
+    date=item.date,
+    title=item.title,
+    name=target_user_name,
+    content=item.content,
+    show_edit=target_is_current %]
+
+[% END # FOREACH %]
+
+
+[% END # WRAPPER %]
