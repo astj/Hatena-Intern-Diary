@@ -18,14 +18,14 @@ sub get_root : Test(2) {
 
     subtest 'Guest Access' => sub {
         $mech = create_mech;
-        $mech->get_ok('/'), 'とりあえず/へのアクセスが通る';
+        $mech->get_ok('/', 'とりあえず/へのアクセスが通る');
         is $mech->uri->path, '/user/login','未Loginだとログイン画面に飛ぶ';
     };
 
     subtest 'Loginned Access' => sub {
         my $user = create_user;
         $mech = create_mech( user=>$user);
-        $mech->get_ok('/'), 'ログインした後に/へのアクセスが通る';
+        $mech->get_ok('/', 'ログインした後に/へのアクセスが通る');
         is $mech->uri->path, sprintf("/diary/list/%s" ,$user->name ), 'Login済みだと自分のDiary一覧に飛ぶ';
     };
 
