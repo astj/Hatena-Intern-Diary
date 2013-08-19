@@ -89,7 +89,7 @@ sub show_article {
     } );
 
     # Give params to View
-    $c->html('diary_list.html', {
+    $c->html('diary_read.html', {
         diaries => [$diary],
         target_user_name => $target_user_name,
         page_title => sprintf("%s - %s", $target_user_name, $target_date->ymd('/')),

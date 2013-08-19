@@ -1,0 +1,43 @@
+[% WRAPPER '_2_column.tt' %]
+
+<div id="article_list_body">
+
+<!-- 手動書き換え用のテンプレ-->
+<div class="article_template">
+[% INCLUDE '_single_article.tt' WITH
+    date='{{ date }}',
+    diary_id='{{ diary_id }}',
+    title='{{ title }}',
+    name='{{ user_name }}',
+    content='{{ content }}',
+    show_edit=target_is_current %]
+</div>
+
+</div>
+
+
+<div id="article_list_footer" style="text-align:center">
+
+          <a class="get_1st_page" href="#">&lt;&lt;</a> |
+          <a class="get_prev_page" href="#">&lt;</a> |
+
+<span class="nav_pagenumber">
+	  Page <span class="current_page">1</span> / <span class="max_page">1</span> |
+</span>
+<span class="nav_loading">
+Now Loading...
+</span>
+          <a class="get_next_page" href="#">&gt;</a> |
+          <a class="get_last_page" href="#">&gt;&gt;</a>
+
+</div>
+
+<script type="text/javascript" src="/js/diary_list.js"></script>
+<script type="text/javascript">
+<!--
+articles_per_page = +[% articles_per_page %];
+target_user_name = '[% target_user_name %]';
+//-->
+</script>
+
+[% END # WRAPPER %]

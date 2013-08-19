@@ -1,1 +1,41 @@
-[% INCLUDE '_article_list.tt' %]
+[% WRAPPER '_2_column.tt' %]
+
+<div id="article_list_body">
+
+[% FOREACH item IN diaries %]
+
+[% INCLUDE '_single_article.tt' WITH
+    date=item.date.ymd('/'),
+    diary_id=item.date.ymd('-'),
+    title=item.title,
+    name=target_user_name,
+    content=item.content,
+    show_edit=target_is_current %]
+
+[% END # FOREACH %]
+
+</div>
+
+<div id="article_list_footer" style="text-align:center">
+
+[% IF current_page != 1 %]
+          <a href="?page=1">&lt;&lt;</a> |
+          <a href="?page=[% current_page -1 %]">&lt;</a> |
+[% ELSE %]
+	  &lt;&lt; |
+	  &lt; |
+[% END # IF current_page %]
+
+	  Page [% current_page %] / [% total_pages %] |
+[% IF current_page != total_pages %]
+          <a href="?page=[% current_page +1 %]">&gt;</a> |
+          <a href="?page=[% total_pages %]">&gt;&gt;</a>
+[% ELSE %]
+	  &gt; |
+	  &gt;&gt;
+[% END # current_page %]
+
+</div>
+
+
+[% END # WRAPPER %]
