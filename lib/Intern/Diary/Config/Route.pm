@@ -83,6 +83,12 @@ sub make_router {
             action => 'diary_list',
         };
 
+        # /diary/list_json/USERNAME
+        # /diary/list_json/USERNAME/
+        connect qr{/diary/list_json/(\w+)/?} => {
+            engine => 'Diary_js',
+            action => 'list',
+        };
 
     };
 }

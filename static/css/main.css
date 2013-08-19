@@ -65,8 +65,16 @@
         margin-bottom:1em;
       }
 
+      .article_template {
+      display:none;
+      }
+
       #article_list_footer {
         text-align: center;
+      }
+
+      .nav_loading {
+        display:none;
       }
 
       .write_table {
