@@ -19,6 +19,16 @@ $ script/setup.sh
 $ script/appup
 ```
 
-## jsの課題やります
-プルリク作るためにコミットしたかっただけなので。
+## jsの課題1
+```
+/diary/list_json/[USER_ID]
+```
+でアクセスできます。
+
+## jsの課題2
+```
+/static/js/timer.js
+```
+です。
+
 
